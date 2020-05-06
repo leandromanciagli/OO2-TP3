@@ -1,12 +1,8 @@
 Class {
 	#name : #Answer,
-	#superclass : #Object,
+	#superclass : #Post,
 	#instVars : [
-		'question',
-		'timestamp',
-		'user',
-		'votes',
-		'description'
+		'question'
 	],
 	#category : #'TP-Refactoring-Model'
 }
@@ -18,21 +14,6 @@ Answer class >> new: anAnswer user: aUser question: aQuestion [
 		user: aUser;
 		question: aQuestion;
 		yourself
-]
-
-{ #category : #adding }
-Answer >> addVote: aVote [
-	votes add: aVote
-]
-
-{ #category : #accessing }
-Answer >> description [
-	^ description
-]
-
-{ #category : #private }
-Answer >> description: anObject [
-	description := anObject
 ]
 
 { #category : #initialize }
@@ -60,29 +41,4 @@ Answer >> positiveVotes [
 { #category : #private }
 Answer >> question: aQuestion [
 	question := aQuestion 
-]
-
-{ #category : #accessing }
-Answer >> timestamp [
-	^ timestamp
-]
-
-{ #category : #private }
-Answer >> timestamp: anObject [
-	timestamp := anObject
-]
-
-{ #category : #accessing }
-Answer >> user [
-	^ user
-]
-
-{ #category : #private }
-Answer >> user: anObject [
-	user := anObject
-]
-
-{ #category : #accessing }
-Answer >> votes [
-	^ votes
 ]

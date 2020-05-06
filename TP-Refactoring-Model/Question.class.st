@@ -1,14 +1,10 @@
 Class {
 	#name : #Question,
-	#superclass : #Object,
+	#superclass : #Post,
 	#instVars : [
 		'title',
 		'answers',
-		'topics',
-		'timestamp',
-		'user',
-		'votes',
-		'description'
+		'topics'
 	],
 	#category : #'TP-Refactoring-Model'
 }
@@ -39,21 +35,6 @@ Question >> addTopic: aTopic [
 
 ]
 
-{ #category : #adding }
-Question >> addVote: aVote [
-	votes add: aVote
-]
-
-{ #category : #accessing }
-Question >> description [
-	^ description
-]
-
-{ #category : #private }
-Question >> description: anObject [
-	description := anObject
-]
-
 { #category : #'initalize-release' }
 Question >> initialize [
 	answers := OrderedCollection new.
@@ -79,16 +60,6 @@ Question >> positiveVotes [
 ]
 
 { #category : #accessing }
-Question >> timestamp [
-	^ timestamp
-]
-
-{ #category : #private }
-Question >> timestamp: anObject [
-	timestamp := anObject
-]
-
-{ #category : #accessing }
 Question >> title [
 	^title 
 ]
@@ -101,19 +72,4 @@ Question >> title: aTitle [
 { #category : #accessing }
 Question >> topics [
 	^topics 
-]
-
-{ #category : #accessing }
-Question >> user [
-	^ user
-]
-
-{ #category : #private }
-Question >> user: anObject [
-	user := anObject
-]
-
-{ #category : #accessing }
-Question >> votes [
-	^ votes
 ]
