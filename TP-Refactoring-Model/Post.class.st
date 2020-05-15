@@ -21,8 +21,14 @@ Post >> description [
 ]
 
 { #category : #private }
-Post >> description: anObject [
-	description := anObject
+Post >> description: aDescription [ 
+	description := aDescription
+]
+
+{ #category : #initialization }
+Post >> initialize [
+	votes := OrderedCollection new.
+	timestamp := DateAndTime now.
 ]
 
 { #category : #accessing }
@@ -31,8 +37,8 @@ Post >> timestamp [
 ]
 
 { #category : #private }
-Post >> timestamp: anObject [
-	timestamp := anObject
+Post >> timestamp: aTimestamp [
+	timestamp := aTimestamp
 ]
 
 { #category : #accessing }
@@ -41,8 +47,8 @@ Post >> user [
 ]
 
 { #category : #private }
-Post >> user: anObject [
-	user := anObject
+Post >> user: aUser [
+	user := aUser
 ]
 
 { #category : #accessing }

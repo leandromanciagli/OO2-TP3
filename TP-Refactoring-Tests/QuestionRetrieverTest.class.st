@@ -22,17 +22,25 @@ Class {
 
 { #category : #testing }
 QuestionRetrieverTest >> popularTodayAtLeastOneVote [
- 
-  "1 likes / 2 preguntas // preguntas con al menos 1 voto"
-  questionUser2TopicOO2 addVote: (Vote user: user3 likesPublication: questionUser2TopicOO2).
-  self assert: (popularTodayRetriever retrieveQuestions: user1) size equals: 1.
-  self assert: (popularTodayRetriever retrieveQuestions: user2) size equals: 0.
-  self assert: (popularTodayRetriever retrieveQuestions: user3) size equals: 1
+	"1 likes / 2 preguntas // preguntas con al menos 1 voto"
+
+	questionUser2TopicOO2
+		addVote: (Vote user: user3 likesPublication: questionUser2TopicOO2).
+	self
+		assert: (popularTodayRetriever retrieveQuestions: user1) size
+		equals: 1.
+	self
+		assert: (popularTodayRetriever retrieveQuestions: user2) size
+		equals: 0.
+	self
+		assert: (popularTodayRetriever retrieveQuestions: user3) size
+		equals: 1
 ]
 
 { #category : #testing }
 QuestionRetrieverTest >> popularTodayFiveLikesFourQuestionsAtLeastOneVote [
-  "5 likes / 4 preguntas // preguntas con mas de 1 voto"question2User3TopicOO2 addVote: (Vote user: User new likesPublication: question2User3TopicOO2).
+  "5 likes / 4 preguntas // preguntas con mas de 1 voto"
+  question2User3TopicOO2 addVote: (Vote user: User new likesPublication: question2User3TopicOO2).
   self assert: (popularTodayRetriever retrieveQuestions: user1) size equals: 1.
   self assert: (popularTodayRetriever retrieveQuestions: user1) first equals: question2User3TopicOO2.
   self assert: (popularTodayRetriever retrieveQuestions: user2) size equals: 1.
@@ -47,7 +55,8 @@ QuestionRetrieverTest >> popularTodayFiveLikesFourQuestionsAtLeastOneVote [
 
 { #category : #testing }
 QuestionRetrieverTest >> popularTodayFourLikesFourQuestionsAtLeastOneVote [
-	  "4 likes / 4 preguntas // preguntas con al menos 1 voto"question2User3TopicOO2 addVote: (Vote user: user1 likesPublication: question2User3TopicOO2).
+	  "4 likes / 4 preguntas // preguntas con al menos 1 voto"
+  question2User3TopicOO2 addVote: (Vote user: user1 likesPublication: question2User3TopicOO2).
   question2User3TopicOO2 addVote: (Vote user: User new likesPublication: question2User3TopicOO2).
   self assert: (popularTodayRetriever retrieveQuestions: user1) size equals: 2.
   self assert: (popularTodayRetriever retrieveQuestions: user2) size equals: 1.
@@ -56,7 +65,8 @@ QuestionRetrieverTest >> popularTodayFourLikesFourQuestionsAtLeastOneVote [
 
 { #category : #testing }
 QuestionRetrieverTest >> popularTodayFourQuestionsAtLeastOneVote [
-	  "1 likes / 4 preguntas // preguntas con al menos 1 voto"question2User3TopicOO2 := Question newWithTitle: 'Which refactoring should...' description: '' user: user3 topic: topicOO2.
+	  "1 likes / 4 preguntas // preguntas con al menos 1 voto"
+  question2User3TopicOO2 := Question newWithTitle: 'Which refactoring should...' description: '' user: user3 topic: topicOO2.
   cuoora addQuestion: question2User3TopicOO2 forUser: user3.
   self assert: (popularTodayRetriever retrieveQuestions: user1) size equals: 1.
   self assert: (popularTodayRetriever retrieveQuestions: user2) size equals: 0.
@@ -94,7 +104,8 @@ QuestionRetrieverTest >> popularTodayNoLikesTwoQuestions [
 
 { #category : #testing }
 QuestionRetrieverTest >> popularTodayTwoLikesFourQuestionsAtLeastOneVote [
-	   "2 likes / 4 preguntas // preguntas con al menos 1 voto"question2User3TopicOO2 addVote: (Vote user: user2 likesPublication: question2User3TopicOO2).
+	   "2 likes / 4 preguntas // preguntas con al menos 1 voto"
+  question2User3TopicOO2 addVote: (Vote user: user2 likesPublication: question2User3TopicOO2).
   self assert: (popularTodayRetriever retrieveQuestions: user1) size equals: 2.
   self assert: (popularTodayRetriever retrieveQuestions: user2) size equals: 1.
   self assert: (popularTodayRetriever retrieveQuestions: user3) size equals: 1.
@@ -123,15 +134,14 @@ QuestionRetrieverTest >> setUp [
 	cuoora addQuestion: questionUser1TopicOO1 forUser:user1.
 	cuoora addQuestion: questionUser3TopicOO2 forUser:user3.
 	
-	socialRetriever := QuestionRetriever new: cuoora and: #social.
-	topicsRetriever := QuestionRetriever new: cuoora and: #topics.
-	newsRetriever := QuestionRetriever new: cuoora and: #news.
-	popularTodayRetriever := QuestionRetriever new: cuoora and: #popularToday.
+	socialRetriever := SocialRetriever new: cuoora.
+	topicsRetriever := TopicRetriever new: cuoora.
+	newsRetriever := NewRetriever new: cuoora.
+	popularTodayRetriever := PopularTodayRetriever new: cuoora.
 ]
 
 { #category : #testing }
 QuestionRetrieverTest >> testNewsRetrieveQuestions [
-	| questionUser2TopicOO2 |
 	self assert: (newsRetriever retrieveQuestions: user1) size equals: 1.
 	self assert: (newsRetriever retrieveQuestions: user1) last equals: questionUser3TopicOO2.
 	self assert: (newsRetriever retrieveQuestions: user2) size equals: 2.

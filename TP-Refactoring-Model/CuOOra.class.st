@@ -44,6 +44,16 @@ CuOOra >> questions [
 	^ questions
 ]
 
+{ #category : #'as yet unclassified' }
+CuOOra >> questionsOfToday [
+	^ self questions select: [ :q | q timestamp asDate = Date today ]
+]
+
+{ #category : #'as yet unclassified' }
+CuOOra >> sumQuestion [
+	^ self questions sum: [ :q | q positiveVotes size ]
+]
+
 { #category : #accessing }
 CuOOra >> topics [
 	^ topics

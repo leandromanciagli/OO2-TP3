@@ -55,8 +55,8 @@ Vote >> publication [
 ]
 
 { #category : #private }
-Vote >> publication: anObject [
-	publication := anObject
+Vote >> publication: aPublication [
+	publication := aPublication
 ]
 
 { #category : #accessing }
@@ -65,6 +65,6 @@ Vote >> user [
 ]
 
 { #category : #private }
-Vote >> user: anObject [
-	user := anObject
+Vote >> user: aUser [
+	user := aUser
 ]

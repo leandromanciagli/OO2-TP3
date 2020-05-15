@@ -16,12 +16,6 @@ Answer class >> new: anAnswer user: aUser question: aQuestion [
 		yourself
 ]
 
-{ #category : #initialize }
-Answer >> initialize [
-	votes := OrderedCollection new.
-	timestamp := DateAndTime now.
-]
-
 { #category : #'as yet unclassified' }
 Answer >> negativeVotes [
 	| r |

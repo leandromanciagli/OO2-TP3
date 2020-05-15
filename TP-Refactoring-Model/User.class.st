@@ -4,12 +4,10 @@ Class {
 	#instVars : [
 		'questionRetriever',
 		'questions',
-		'answers',
 		'username',
 		'password',
 		'topics',
-		'following',
-		'votes'
+		'following'
 	],
 	#category : #'TP-Refactoring-Model'
 }
@@ -17,16 +15,15 @@ Class {
 { #category : #'instance-creation' }
 User class >> username: aUsername password: aPassword questionRetriever: aQuestionRetriever [
 	^ self new
+		initializeUser: aUsername
+		password: aPassword
+		questionRetriever: aQuestionRetriever
+
+	"^ self new
 		username: aUsername;
 		password: aPassword;
 		questionRetriever: aQuestionRetriever;
-		yourself
-]
-
-{ #category : #accessing }
-User >> addAnswer: anAnswer [
-	answers add: anAnswer 
-
+		yourself"
 ]
 
 { #category : #accessing }
@@ -41,16 +38,6 @@ User >> addTopic: aTopic [
 ]
 
 { #category : #accessing }
-User >> addVote: aVote [
-	votes add: aVote
-]
-
-{ #category : #accessing }
-User >> answers [
-	^ answers
-]
-
-{ #category : #accessing }
 User >> follow: aUser [
 	following add: aUser 
 ]
@@ -62,12 +49,16 @@ User >> following [
 
 { #category : #initialize }
 User >> initialize [
+	questions := OrderedCollection new.
+	topics := OrderedCollection new.
+	following := OrderedCollection new
+]
 
-	questions := OrderedCollection new.  
-	answers := OrderedCollection new. 
-	topics := OrderedCollection new. 
-	following := OrderedCollection new. 
-	votes := OrderedCollection new.
+{ #category : #initialization }
+User >> initializeUser: aUsername password: aPassword questionRetriever: aQuestionRetriever [
+	username := aUsername.
+	password := aPassword.
+	questionRetriever := aQuestionRetriever
 ]
 
 { #category : #accessing }
@@ -76,8 +67,8 @@ User >> password [
 ]
 
 { #category : #private }
-User >> password: anObject [
-	password := anObject
+User >> password: aPassword [
+	password := aPassword
 ]
 
 { #category : #accessing }
@@ -95,9 +86,19 @@ User >> questions [
 	^ questions
 ]
 
+{ #category : #'as yet unclassified' }
+User >> questionsFromAllTopics [
+	^ self topics flatCollect: [ :topic | topic questions ]
+]
+
+{ #category : #'as yet unclassified' }
+User >> questionsFromFollowers [
+	^ self following  flatCollect: [: follower | follower questions ].
+]
+
 { #category : #accessing }
 User >> questionsOfInterest [
-	^ questionRetriever retrieveQuestions: self.
+	^ questionRetriever retrieveQuestions.
 ]
 
 { #category : #accessing }
@@ -113,9 +114,4 @@ User >> username [
 { #category : #private }
 User >> username: anObject [
 	username := anObject
-]
-
-{ #category : #accessing }
-User >> votes [
-	^ votes
 ]
