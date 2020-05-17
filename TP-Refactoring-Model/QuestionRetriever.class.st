@@ -12,14 +12,6 @@ QuestionRetriever class >> new: cuoora [
 	^ self new cuoora: cuoora
 ]
 
-{ #category : #'instance creation' }
-QuestionRetriever class >> new: cuoora and: aUser [
-	^ self new
-		cuoora: cuoora;
-		user: aUser;
-		yourself
-]
-
 { #category : #accesing }
 QuestionRetriever >> cuoora: aCuooraInstance [
 	cuoora := aCuooraInstance 
